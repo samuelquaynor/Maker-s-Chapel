@@ -232,36 +232,40 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         theme: appStateManager.themeData,
         navigatorKey: navigatorKey,
         title: 'App',
-        home: Container(
-          color: Color(0xFF2A4533),
-          child: Center(
-            child: Container(
-              width: double.infinity,
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Image(width: 80, image: AssetImage('assets/icon/icon.png')),
-                  Container(height: 10),
-                  Text("The Maker's House Chapel\n International",
-                      textAlign: TextAlign.center,
-                      style: TextStyles.medium(context).copyWith(
-                          fontFamily: "serif",
+        home: appStateManager.isLoadingTheme
+            ? Container(
+                color: Color(0xFF2A4533),
+                child: Center(
+                  child: Container(
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Image(
+                            width: 80,
+                            image: AssetImage('assets/icon/icon.png')),
+                        Container(height: 10),
+                        Text("The Maker's House Chapel\n International",
+                            textAlign: TextAlign.center,
+                            style: TextStyles.medium(context).copyWith(
+                                fontFamily: "serif",
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18)),
+                        Container(height: 30),
+                        CupertinoActivityIndicator(
+                          radius: 20,
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18)),
-                  Container(height: 30),
-                  CupertinoActivityIndicator(
-                    radius: 20,
-                    color: Colors.white,
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            : widget._defaultHome,
         debugShowCheckedModeBanner: false,
         onGenerateRoute: (settings) {
           if (settings.name == AddPlaylistScreen.routeName) {
