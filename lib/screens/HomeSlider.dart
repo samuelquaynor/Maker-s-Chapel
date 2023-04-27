@@ -18,7 +18,7 @@ class HomeSlider extends StatelessWidget {
     return Column(
       children: <Widget>[
         Container(
-          padding: EdgeInsets.only(top: 10.0, left: 10.0),
+          padding: EdgeInsets.only(left: 10.0),
           height: 180.0,
           width: MediaQuery.of(context).size.width,
           child: ListView.builder(
@@ -39,7 +39,7 @@ class HomeSlider extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
-                            height: 130.0,
+                            height: 150.0,
                             width: 120.0,
                             child: CachedNetworkImage(
                               imageUrl: curObj.coverPhoto!,

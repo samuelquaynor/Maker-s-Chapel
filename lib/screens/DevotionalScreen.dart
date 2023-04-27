@@ -50,91 +50,92 @@ class _DevotionalScreenState extends State<DevotionalScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(t.devotionals),
-        actions: [
-          SizedBox(
-            height: 38,
-            width: 38,
-            child: InkWell(
-              highlightColor: Colors.transparent,
-              borderRadius: const BorderRadius.all(Radius.circular(32.0)),
-              onTap: () {
-                setState(() {
-                  selectedDate = selectedDate.subtract(new Duration(days: 1));
-                  _selecteddate = DateFormat('yyyy-MM-dd').format(selectedDate);
-                });
-              },
-              child: Center(
-                child: Icon(
-                  Icons.keyboard_arrow_left,
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 8,
-              right: 8,
-            ),
-            child: Row(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: Icon(
-                    Icons.calendar_today,
-                    size: 18,
+        body: SingleChildScrollView(
+            padding: EdgeInsets.only(top: 12),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: 38,
+                        child: InkWell(
+                          highlightColor: Colors.transparent,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(32.0)),
+                          onTap: () {
+                            setState(() {
+                              selectedDate =
+                                  selectedDate.subtract(new Duration(days: 1));
+                              _selecteddate =
+                                  DateFormat('yyyy-MM-dd').format(selectedDate);
+                            });
+                          },
+                          child: Center(
+                            child: Icon(
+                              Icons.keyboard_arrow_left,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 8,
+                          right: 8,
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: Icon(
+                                Icons.calendar_today,
+                                size: 18,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                _selectDate(context);
+                              },
+                              child: Text(
+                                DateFormat('d MMM').format(selectedDate),
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18,
+                                  letterSpacing: -0.2,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                          width: 38,
+                          child: InkWell(
+                              highlightColor: Colors.transparent,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(32.0)),
+                              onTap: () {
+                                setState(() {
+                                  selectedDate =
+                                      selectedDate.add(new Duration(days: 1));
+                                  _selecteddate = DateFormat('yyyy-MM-dd')
+                                      .format(selectedDate);
+                                });
+                              },
+                              child: Center(
+                                  child: Icon(Icons.keyboard_arrow_right)))),
+                    ],
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    _selectDate(context);
-                  },
-                  child: Text(
-                    DateFormat('d MMM').format(selectedDate),
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: 18,
-                      letterSpacing: -0.2,
-                    ),
-                  ),
-                ),
+                DevotionalsPageBody(
+                    key: UniqueKey(),
+                    date: _selecteddate,
+                    dateTime: selectedDate),
               ],
-            ),
-          ),
-          SizedBox(
-            height: 38,
-            width: 38,
-            child: InkWell(
-              highlightColor: Colors.transparent,
-              borderRadius: const BorderRadius.all(Radius.circular(32.0)),
-              onTap: () {
-                setState(() {
-                  selectedDate = selectedDate.add(new Duration(days: 1));
-                  _selecteddate = DateFormat('yyyy-MM-dd').format(selectedDate);
-                });
-              },
-              child: Center(
-                child: Icon(
-                  Icons.keyboard_arrow_right,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: EdgeInsets.only(top: 12),
-        child: SingleChildScrollView(
-          child: DevotionalsPageBody(
-            key: UniqueKey(),
-            date: _selecteddate,
-            dateTime: selectedDate,
-          ),
-        ),
-      ),
-    );
+            )));
   }
 }
 
@@ -231,7 +232,7 @@ class _BranchesPageBodyState extends State<DevotionalsPageBody> {
       );
     } else
       return Container(
-        padding: EdgeInsets.symmetric(vertical: 25, horizontal: 25),
+        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 25),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[

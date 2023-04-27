@@ -51,86 +51,169 @@ class _EventsListScreenState extends State<EventsListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(t.events),
-        actions: [
-          SizedBox(
-            height: 38,
-            width: 38,
-            child: InkWell(
-              highlightColor: Colors.transparent,
-              borderRadius: const BorderRadius.all(Radius.circular(32.0)),
-              onTap: () {
-                setState(() {
-                  selectedDate = selectedDate.subtract(new Duration(days: 1));
-                  _selecteddate = DateFormat('yyyy-MM-dd').format(selectedDate);
-                });
-              },
-              child: Center(
-                child: Icon(
-                  Icons.keyboard_arrow_left,
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 8,
-              right: 8,
-            ),
-            child: Row(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: Icon(
-                    Icons.calendar_today,
-                    size: 18,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    _selectDate(context);
-                  },
-                  child: Text(
-                    DateFormat('d MMM').format(selectedDate),
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: 18,
-                      letterSpacing: -0.2,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 38,
-            width: 38,
-            child: InkWell(
-              highlightColor: Colors.transparent,
-              borderRadius: const BorderRadius.all(Radius.circular(32.0)),
-              onTap: () {
-                setState(() {
-                  selectedDate = selectedDate.add(new Duration(days: 1));
-                  _selecteddate = DateFormat('yyyy-MM-dd').format(selectedDate);
-                });
-              },
-              child: Center(
-                child: Icon(
-                  Icons.keyboard_arrow_right,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: Padding(
+      // appBar: AppBar(
+      //   title: Text(t.events),
+      //   actions: [
+      //     SizedBox(
+      //       height: 38,
+      //       width: 38,
+      //       child: InkWell(
+      //         highlightColor: Colors.transparent,
+      //         borderRadius: const BorderRadius.all(Radius.circular(32.0)),
+      //         onTap: () {
+      //           setState(() {
+      //             selectedDate = selectedDate.subtract(new Duration(days: 1));
+      //             _selecteddate = DateFormat('yyyy-MM-dd').format(selectedDate);
+      //           });
+      //         },
+      //         child: Center(
+      //           child: Icon(
+      //             Icons.keyboard_arrow_left,
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //     Padding(
+      //       padding: const EdgeInsets.only(
+      //         left: 8,
+      //         right: 8,
+      //       ),
+      //       child: Row(
+      //         children: <Widget>[
+      //           Padding(
+      //             padding: const EdgeInsets.only(right: 8),
+      //             child: Icon(
+      //               Icons.calendar_today,
+      //               size: 18,
+      //             ),
+      //           ),
+      //           InkWell(
+      //             onTap: () {
+      //               _selectDate(context);
+      //             },
+      //             child: Text(
+      //               DateFormat('d MMM').format(selectedDate),
+      //               textAlign: TextAlign.left,
+      //               style: TextStyle(
+      //                 fontWeight: FontWeight.normal,
+      //                 fontSize: 18,
+      //                 letterSpacing: -0.2,
+      //               ),
+      //             ),
+      //           ),
+      //         ],
+      //       ),
+      //     ),
+      //     SizedBox(
+      //       height: 38,
+      //       width: 38,
+      //       child: InkWell(
+      //         highlightColor: Colors.transparent,
+      //         borderRadius: const BorderRadius.all(Radius.circular(32.0)),
+      //         onTap: () {
+      //           setState(() {
+      //             selectedDate = selectedDate.add(new Duration(days: 1));
+      //             _selecteddate = DateFormat('yyyy-MM-dd').format(selectedDate);
+      //           });
+      //         },
+      //         child: Center(
+      //           child: Icon(
+      //             Icons.keyboard_arrow_right,
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
+      body: SingleChildScrollView(
         padding: EdgeInsets.only(top: 12),
-        child: EventsListScreenPageBody(
-          key: UniqueKey(),
-          date: _selecteddate,
-          dateTime: selectedDate,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      width: 38,
+                      child: InkWell(
+                        highlightColor: Colors.transparent,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(32.0)),
+                        onTap: () {
+                          setState(() {
+                            selectedDate =
+                                selectedDate.subtract(new Duration(days: 1));
+                            _selecteddate =
+                                DateFormat('yyyy-MM-dd').format(selectedDate);
+                          });
+                        },
+                        child: Center(
+                          child: Icon(
+                            Icons.keyboard_arrow_left,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 8,
+                        right: 8,
+                      ),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: Icon(
+                              Icons.calendar_today,
+                              size: 18,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              _selectDate(context);
+                            },
+                            child: Text(
+                              DateFormat('d MMM').format(selectedDate),
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 18,
+                                letterSpacing: -0.2,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                        width: 38,
+                        child: InkWell(
+                            highlightColor: Colors.transparent,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(32.0)),
+                            onTap: () {
+                              setState(() {
+                                selectedDate =
+                                    selectedDate.add(new Duration(days: 1));
+                                _selecteddate =
+                                    DateFormat('yyyy-MM-dd').format(selectedDate);
+                              });
+                            },
+                            child:
+                                Center(child: Icon(Icons.keyboard_arrow_right)))),
+                  ],
+                ),
+              ),
+            ),
+            EventsListScreenPageBody(
+              key: UniqueKey(),
+              date: _selecteddate,
+              dateTime: selectedDate,
+            ),
+          ],
         ),
       ),
     );
@@ -225,6 +308,7 @@ class _BranchesPageBodyState extends State<EventsListScreenPageBody> {
         itemCount: items!.length,
         scrollDirection: Axis.vertical,
         padding: EdgeInsets.all(3),
+        shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
           return ItemTile(
             index: index,

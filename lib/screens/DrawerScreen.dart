@@ -16,6 +16,7 @@ import '../utils/my_colors.dart';
 import '../utils/ApiUrl.dart';
 import '../auth/LoginScreen.dart';
 import '../i18n/strings.g.dart';
+import 'BranchesScreen.dart';
 
 class DrawerScreen extends StatefulWidget {
   DrawerScreen({Key? key}) : super(key: key);
@@ -439,6 +440,30 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               size: 20.0, color: Colors.grey[500]),
                           Container(width: 10),
                           Text(t.rate,
+                              style: TextStyles.subhead(context).copyWith(
+                                fontSize: 15,
+                              )),
+                          Spacer(),
+                          Icon(Icons.navigate_next,
+                              size: 25.0, color: Colors.grey[300]),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(height: 10),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(BranchesScreen.routeName);
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+                      child: Row(
+                        children: <Widget>[
+                          Icon(Icons.church,
+                              size: 20.0, color: Colors.grey[500]),
+                          Container(width: 10),
+                          Text('Branches',
                               style: TextStyles.subhead(context).copyWith(
                                 fontSize: 15,
                               )),

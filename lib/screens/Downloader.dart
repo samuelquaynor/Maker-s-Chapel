@@ -8,12 +8,15 @@ import '../utils/TextStyles.dart';
 import '../utils/TimUtil.dart';
 import '../i18n/strings.g.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../utils/my_colors.dart';
 import '../widgets/MediaPopupMenu.dart';
 import '../video_player/VideoPlayer.dart';
 import '../models/ScreenArguements.dart';
 import '../utils/Utility.dart';
 import '../providers/AudioPlayerModel.dart';
 import '../audio_player/player_page.dart';
+import 'BibleScreen.dart';
+import 'SearchScreen.dart';
 
 class Downloader extends StatefulWidget with WidgetsBindingObserver {
   final TargetPlatform? platform;
@@ -56,57 +59,89 @@ class _MyHomePageState extends State<Downloader> {
     downloadsModel = Provider.of<DownloadsModel>(context);
 
     return new Scaffold(
-      appBar: AppBar(
-        title: TextField(
-          maxLines: 1,
-          controller: inputController,
-          style: new TextStyle(fontSize: 18, color: Colors.white),
-          keyboardType: TextInputType.text,
-          onSubmitted: (query) {
-            //downloadsModel.searchDownloads(query);
-          },
-          /* onChanged: (term) {
-            setState(() {
-              showClear = (term.length > 2);
-            });
-            if (term.length == 0) {
-              //downloadsModel.cancelSearch();
-            }
-          },*/
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: t.downloads,
-            hintStyle: TextStyle(fontSize: 20.0, color: Colors.white70),
-          ),
-        ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: <Widget>[
-          showClear
-              ? IconButton(
-                  icon: const Icon(
-                    Icons.close,
-                  ),
-                  onPressed: () {
-                    inputController.clear();
-                    showClear = false;
-                    downloadsModel!.cancelSearch();
-                  },
-                )
-              : Container(),
-        ],
-      ),
+      // appBar: AppBar(
+      //   title: TextField(
+      //     maxLines: 1,
+      //     controller: inputController,
+      //     style: new TextStyle(fontSize: 18, color: Colors.white),
+      //     keyboardType: TextInputType.text,
+      //     onSubmitted: (query) {
+      //       //downloadsModel.searchDownloads(query);
+      //     },
+      //     /* onChanged: (term) {
+      //       setState(() {
+      //         showClear = (term.length > 2);
+      //       });
+      //       if (term.length == 0) {
+      //         //downloadsModel.cancelSearch();
+      //       }
+      //     },*/
+      //     decoration: InputDecoration(
+      //       border: InputBorder.none,
+      //       hintText: t.downloads,
+      //       hintStyle: TextStyle(fontSize: 20.0, color: Colors.white70),
+      //     ),
+      //   ),
+      //   leading: IconButton(
+      //     icon: const Icon(
+      //       Icons.arrow_back,
+      //     ),
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //   ),
+      //   actions: <Widget>[
+      //     showClear
+      //         ? IconButton(
+      //             icon: const Icon(
+      //               Icons.close,
+      //             ),
+      //             onPressed: () {
+      //               inputController.clear();
+      //               showClear = false;
+      //               downloadsModel!.cancelSearch();
+      //             },
+      //           )
+      //         : Container(),
+      //   ],
+      // ),
       /*new AppBar(
         title: new Text(Strings.downloads),
         
       ),*/
-      body: BuildBodyPage(downloadsModel: downloadsModel, filter: filter),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Container(
+                width: double.infinity,
+                height: 60,
+                margin: EdgeInsets.only(bottom: 15),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      IconButton(
+                          padding: EdgeInsets.only(left: 15, bottom: 10),
+                          onPressed: () => Navigator.of(context)
+                              .pushNamed(BibleScreen.routeName),
+                          icon: Icon(Icons.book, size: 32)),
+                      Text(
+                        'DOWNLOADS',
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700,
+                            color: MyColors.primary),
+                      ),
+                      IconButton(
+                          padding: EdgeInsets.only(right: 15, bottom: 10),
+                          onPressed: () => Navigator.pushNamed(
+                              context, SearchScreen.routeName),
+                          icon: Icon(Icons.search, size: 32))
+                    ])),
+            BuildBodyPage(downloadsModel: downloadsModel, filter: filter),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -128,7 +163,7 @@ class BuildBodyPage extends StatelessWidget {
         child: new CircularProgressIndicator(),
       );
     if (!downloadsModel!.permissionReady) {
-      return new Container(
+      return Container(
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -164,13 +199,32 @@ class BuildBodyPage extends StatelessWidget {
     if (downloadsModel!.permissionReady &&
         downloadsModel!.downloadsList.length == 0) {
       return Center(
-        child: Container(
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(t.noitemstodisplay,
-                textAlign: TextAlign.center, style: TextStyles.medium(context)),
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.warning,
+              size: 80.0,
+              color: Colors.grey,
+            ),
+            SizedBox(height: 20.0),
+            Text(
+              "No items to display",
+              style: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey,
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Text(
+              "Please try again later",
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Colors.grey,
+              ),
+            ),
+          ],
         ),
       );
     }

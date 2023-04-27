@@ -5,7 +5,6 @@ import 'package:share_plus/share_plus.dart';
 import '../models/ScreenArguements.dart';
 import 'dart:async';
 import 'dart:math';
-import '../screens/BookmarkedHymnsListScreen.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:provider/provider.dart';
 import '../providers/HymnsBookmarksModel.dart';
@@ -35,59 +34,6 @@ class _HymnsListScreenState extends State<HymnsListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: TextField(
-          maxLines: 1,
-          controller: inputController,
-          style: new TextStyle(fontSize: 18, color: Colors.white),
-          keyboardType: TextInputType.text,
-          onSubmitted: (_query) {
-            setState(() {
-              query = _query;
-              showClear = (_query.length > 0);
-            });
-          },
-          onChanged: (term) {
-            /* setState(() {
-              showClear = (term.length > 2);
-            });*/
-          },
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: t.hymns,
-            hintStyle: TextStyle(fontSize: 20.0, color: Colors.white70),
-          ),
-        ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: <Widget>[
-          showClear
-              ? IconButton(
-                  icon: const Icon(
-                    Icons.close,
-                  ),
-                  onPressed: () {
-                    inputController.clear();
-                    showClear = false;
-                    setState(() {
-                      query = "";
-                    });
-                  },
-                )
-              : IconButton(
-                  icon: Icon(Icons.bookmark),
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed(BookmarkedHymnsListScreen.routeName);
-                  }),
-        ],
-      ),
       body: Padding(
         padding: EdgeInsets.only(top: 12),
         child: HymnScreenBody(
@@ -267,8 +213,7 @@ class ItemTile extends StatelessWidget {
   const ItemTile({
     Key? key,
     required this.object,
-  })  : 
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

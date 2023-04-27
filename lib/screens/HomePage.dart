@@ -94,41 +94,41 @@ class _HomePageItemState extends State<HomePageItem> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 60.0,
-          title: Text(t.appname),
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius:
-                      BorderRadius.circular(AppBar().preferredSize.height),
-                  child: Icon(
-                    Icons.cloud_download,
-                    color: Colors.white,
-                  ),
-                  onTap: () {
-                    Navigator.pushNamed(context, Downloader.routeName,
-                        arguments: ScreenArguements(
-                          position: 0,
-                          items: null,
-                        ));
-                  },
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: (() {
-                    Navigator.pushNamed(context, SearchScreen.routeName);
-                  })),
-            )
-          ],
-        ),
+        // appBar: AppBar(
+        //   toolbarHeight: 60.0,
+        //   title: Text(t.appname),
+        //   actions: <Widget>[
+        //     Padding(
+        //       padding: const EdgeInsets.all(8.0),
+        //       child: Material(
+        //         color: Colors.transparent,
+        //         child: InkWell(
+        //           borderRadius:
+        //               BorderRadius.circular(AppBar().preferredSize.height),
+        //           child: Icon(
+        //             Icons.cloud_download,
+        //             color: Colors.white,
+        //           ),
+        //           onTap: () {
+        //             Navigator.pushNamed(context, Downloader.routeName,
+        //                 arguments: ScreenArguements(
+        //                   position: 0,
+        //                   items: null,
+        //                 ));
+        //           },
+        //         ),
+        //       ),
+        //     ),
+        //     Padding(
+        //       padding: const EdgeInsets.all(8.0),
+        //       child: IconButton(
+        //           icon: Icon(Icons.search),
+        //           onPressed: (() {
+        //             Navigator.pushNamed(context, SearchScreen.routeName);
+        //           })),
+        //     )
+        //   ],
+        // ),
         body: ChangeNotifierProvider(
           create: (context) => HomeProvider(),
           child: MyHomePage(),

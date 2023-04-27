@@ -50,53 +50,53 @@ class NotesListScreenRouteState extends State<NotesListScreen> {
     List<Notes> items = notesProvider!.notesList;
 
     return Scaffold(
-      appBar: AppBar(
-        title: TextField(
-          maxLines: 1,
-          controller: inputController,
-          style: new TextStyle(fontSize: 18, color: Colors.white),
-          keyboardType: TextInputType.text,
-          onChanged: (term) {
-            if (term.length > 0) {
-              notesProvider!.searchNotes(term);
-              showClear = true;
-            } else if (term.length == 0) {
-              showClear = false;
-              notesProvider!.getNotes();
-            }
-          },
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: t.notes,
-            hintStyle: TextStyle(fontSize: 20.0, color: Colors.white70),
-          ),
-        ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: <Widget>[
-          showClear
-              ? IconButton(
-                  icon: const Icon(
-                    Icons.close,
-                  ),
-                  onPressed: () {
-                    inputController.clear();
-                    showClear = false;
-                    setState(() {
-                      query = "";
-                    });
-                    notesProvider!.getNotes();
-                  },
-                )
-              : Container(),
-        ],
-      ),
+      // appBar: AppBar(
+      //   title: TextField(
+      //     maxLines: 1,
+      //     controller: inputController,
+      //     style: new TextStyle(fontSize: 18, color: Colors.white),
+      //     keyboardType: TextInputType.text,
+      //     onChanged: (term) {
+      //       if (term.length > 0) {
+      //         notesProvider!.searchNotes(term);
+      //         showClear = true;
+      //       } else if (term.length == 0) {
+      //         showClear = false;
+      //         notesProvider!.getNotes();
+      //       }
+      //     },
+      //     decoration: InputDecoration(
+      //       border: InputBorder.none,
+      //       hintText: t.notes,
+      //       hintStyle: TextStyle(fontSize: 20.0, color: Colors.white70),
+      //     ),
+      //   ),
+      //   leading: IconButton(
+      //     icon: const Icon(
+      //       Icons.arrow_back,
+      //     ),
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //   ),
+      //   actions: <Widget>[
+      //     showClear
+      //         ? IconButton(
+      //             icon: const Icon(
+      //               Icons.close,
+      //             ),
+      //             onPressed: () {
+      //               inputController.clear();
+      //               showClear = false;
+      //               setState(() {
+      //                 query = "";
+      //               });
+      //               notesProvider!.getNotes();
+      //             },
+      //           )
+      //         : Container(),
+      //   ],
+      // ),
       body: Padding(
         padding: EdgeInsets.only(top: 12),
         child: (items.length == 0)

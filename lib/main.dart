@@ -44,7 +44,7 @@ void main() async {
     } else {
       return HomePage();
     }
-  }
+  } 
 
   runApp(
     TranslationProvider(
