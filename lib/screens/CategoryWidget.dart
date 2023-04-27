@@ -6,21 +6,31 @@ import 'package:shimmer/shimmer.dart';
 
 import '../models/Categories.dart';
 import '../models/ScreenArguements.dart';
+import '../providers/AppStateManager.dart';
 import '../providers/CategoriesModel.dart';
 import '../utils/my_colors.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'CategoriesMediaScreen.dart';
 
-class CategoriesWidget extends StatelessWidget {
+class CategoriesWidget extends StatefulWidget {
   const CategoriesWidget({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<CategoriesWidget> createState() => _CategoriesWidgetState();
+}
+
+class _CategoriesWidgetState extends State<CategoriesWidget> {
+  late AppStateManager appManager;
+
+  @override
   Widget build(BuildContext context) {
     CategoriesModel categoriesModel = Provider.of<CategoriesModel>(context);
+    appManager = Provider.of<AppStateManager>(context);
     List<Categories>? items = categoriesModel.categories;
+
     if (categoriesModel.isLoading) {
       return Padding(
         padding: const EdgeInsets.all(16.0),
@@ -53,7 +63,9 @@ class CategoriesWidget extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: MyColors.primary)),
+                      color: appManager.preferredTheme == 1
+                          ? Colors.white
+                          : MyColors.primary)),
               // trailing: IconButton(
               //     onPressed: () => null, icon: Icon(Icons.arrow_forward))
             ),
@@ -64,8 +76,8 @@ class CategoriesWidget extends StatelessWidget {
                         Navigator.pushNamed(
                           context,
                           CategoriesMediaScreen.routeName,
-                          arguments:
-                              ScreenArguements(position: 0, items: items![itemIndex]),
+                          arguments: ScreenArguements(
+                              position: 0, items: items![itemIndex]),
                         );
                       },
                       child: Container(
@@ -107,7 +119,9 @@ class CategoriesWidget extends StatelessWidget {
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
-                                        color: MyColors.primary)),
+                                        color: appManager.preferredTheme == 1
+                                            ? Colors.white
+                                            : MyColors.primary)),
                               )
                             ],
                           )),

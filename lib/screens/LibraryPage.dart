@@ -33,9 +33,9 @@ class LibraryPage extends StatelessWidget {
                         Text(
                           'LIBRARY',
                           style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w700,
-                              color: MyColors.primary),
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                         IconButton(
                             padding: EdgeInsets.only(right: 15, bottom: 10),
@@ -59,27 +59,27 @@ class LibraryPage extends StatelessWidget {
                         Tab(
                             child: Text('DEVOTION',
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                    color: MyColors.primary))),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                ))),
                         Tab(
                             child: Text('HYMNS',
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                    color: MyColors.primary))),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                ))),
                         Tab(
                             child: Text('NOTES',
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                    color: MyColors.primary))),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                ))),
                         Tab(
                             child: Text('EVENTS',
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                    color: MyColors.primary))),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                ))),
                       ])),
               Expanded(
                   child: TabBarView(children: [

@@ -5,6 +5,7 @@ import '../models/Userdata.dart';
 import 'package:provider/provider.dart';
 import 'package:churchapp_flutter/utils/my_colors.dart';
 import 'package:flutter/material.dart';
+import '../providers/AppStateManager.dart';
 import '../providers/HomeProvider.dart';
 import 'BibleScreen.dart';
 import 'DrawerScreen.dart';
@@ -23,6 +24,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   HomeProvider? homeProvider;
+  late AppStateManager appManager;
 
   @override
   void initState() {
@@ -41,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     homeProvider = Provider.of<HomeProvider>(context);
+    appManager = Provider.of<AppStateManager>(context);
 
     List pages = [
       HomeWidget(
@@ -65,12 +68,15 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         child: CircleAvatar(
-          backgroundColor: Colors.white,
+          backgroundColor:
+              appManager.preferredTheme == 1 ? Colors.white : MyColors.primary,
           radius: 30,
           child: Align(
             alignment: Alignment.center,
             child: IconButton(
-                color: MyColors.primary,
+                color: appManager.preferredTheme == 0
+                    ? Colors.white
+                    : MyColors.primary,
                 onPressed: () =>
                     Navigator.of(context).pushNamed(BibleScreen.routeName),
                 icon: Icon(Icons.book, size: 32)),
@@ -78,37 +84,48 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: MyColors.primary,
+          selectedItemColor:
+              appManager.preferredTheme == 1 ? Colors.white : MyColors.primary,
           unselectedItemColor: Colors.grey,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home,
-                  color: MyColors.primary,
+                  color: appManager.preferredTheme == 1
+                      ? Colors.white
+                      : MyColors.primary,
                 ),
                 label: 'Home'),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.library_books,
-                  color: MyColors.primary,
+                  color: appManager.preferredTheme == 1
+                      ? Colors.white
+                      : MyColors.primary,
                 ),
                 label: 'Library'),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.monetization_on_outlined,
-                  color: MyColors.primary,
+                  color: appManager.preferredTheme == 1
+                      ? Colors.white
+                      : MyColors.primary,
                 ),
                 label: 'Donate'),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.download,
-                  color: MyColors.primary,
+                  color: appManager.preferredTheme == 1
+                      ? Colors.white
+                      : MyColors.primary,
                 ),
                 label: 'Downloads'),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,
-                  color: MyColors.primary,
+                  color: appManager.preferredTheme == 1
+                      ? Colors.white
+                      : MyColors.primary,
                 ),
                 label: 'Profile')
           ],

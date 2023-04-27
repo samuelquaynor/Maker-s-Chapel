@@ -52,8 +52,7 @@ class _DonatePageState extends State<DonatePage> {
                       'DONATE',
                       style: TextStyle(
                           fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                          color: MyColors.primary),
+                          fontWeight: FontWeight.w700),
                     ),
                     IconButton(
                         padding: EdgeInsets.only(right: 15, bottom: 10),

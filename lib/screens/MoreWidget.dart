@@ -26,8 +26,7 @@ class MoreWidget extends StatelessWidget {
               title: Text('More',
                   style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: MyColors.primary))),
+                      fontWeight: FontWeight.w500))),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(children: [

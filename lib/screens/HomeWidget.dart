@@ -14,7 +14,7 @@ import 'NoitemScreen.dart';
 import 'SearchScreen.dart';
 import 'Sermons.dart';
 
-class HomeWidget extends StatelessWidget {
+class HomeWidget extends StatefulWidget {
   const HomeWidget({
     Key? key,
     required this.homeProvider,
@@ -22,14 +22,22 @@ class HomeWidget extends StatelessWidget {
 
   final HomeProvider? homeProvider;
 
+  @override
+  State<HomeWidget> createState() => _HomeWidgetState();
+}
+
+class _HomeWidgetState extends State<HomeWidget> {
+  late AppStateManager appManager;
+
   onRetryClick() {
-    homeProvider!.loadItems();
+    widget.homeProvider!.loadItems();
   }
 
   @override
   Widget build(BuildContext context) {
+    appManager = Provider.of<AppStateManager>(context);
     Provider.of<AppStateManager>(context);
-    if (homeProvider!.isLoading) {
+    if (widget.homeProvider!.isLoading) {
       return Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
@@ -79,7 +87,7 @@ class HomeWidget extends StatelessWidget {
                                 ])),
                         itemCount: 12)))
           ]));
-    } else if (homeProvider!.isError) {
+    } else if (widget.homeProvider!.isError) {
       return NoitemScreen(
           title: t.oops, message: t.dataloaderror, onClick: onRetryClick);
     } else
@@ -111,7 +119,9 @@ class HomeWidget extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w700,
-                                    color: MyColors.primary),
+                                    color: appManager.preferredTheme == 1
+                                        ? Colors.white
+                                        : MyColors.primary),
                               ),
                               IconButton(
                                   padding:
@@ -127,8 +137,10 @@ class HomeWidget extends StatelessWidget {
                             indicator: BoxDecoration(
                                 border: Border(
                                     bottom: BorderSide(
-                                        color: MyColors
-                                            .primary, // Replace with the color you want for the selected tab's border
+                                        color: appManager.preferredTheme == 1
+                                            ? Colors.white
+                                            : MyColors
+                                                .primary, // Replace with the color you want for the selected tab's border
                                         width:
                                             2.0 // Replace with the width you want for the selected tab's border
                                         ))),
@@ -138,22 +150,26 @@ class HomeWidget extends StatelessWidget {
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w700,
-                                          color: MyColors.primary))),
+                                          color: appManager.preferredTheme == 1
+                                              ? Colors.white
+                                              : MyColors.primary))),
                               Tab(
                                   child: Text('LIVE',
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w700,
-                                          color: MyColors.primary)))
+                                          color: appManager.preferredTheme == 1
+                                              ? Colors.white
+                                              : MyColors.primary)))
                             ])),
                     Expanded(
                         child: TabBarView(children: [
                       // Content of Tab 1
-                      SermonsWidget(homeProvider: homeProvider),
+                      SermonsWidget(homeProvider: widget.homeProvider),
                       // Content of Tab 2
                       LivestreamsPlayer(
-                          liveStreams:
-                              homeProvider!.data['livestream'] as LiveStreams?)
+                          liveStreams: widget.homeProvider!.data['livestream']
+                              as LiveStreams?)
                     ])),
                     // Expanded(
                     //   child: HomePageBody(

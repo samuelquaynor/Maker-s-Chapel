@@ -129,8 +129,7 @@ class _MyHomePageState extends State<Downloader> {
                         'DOWNLOADS',
                         style: TextStyle(
                             fontSize: 15,
-                            fontWeight: FontWeight.w700,
-                            color: MyColors.primary),
+                            fontWeight: FontWeight.w700),
                       ),
                       IconButton(
                           padding: EdgeInsets.only(right: 15, bottom: 10),
@@ -205,15 +204,13 @@ class BuildBodyPage extends StatelessWidget {
             Icon(
               Icons.warning,
               size: 80.0,
-              color: Colors.grey,
             ),
             SizedBox(height: 20.0),
             Text(
               "No items to display",
               style: TextStyle(
                 fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey,
+                fontWeight: FontWeight.bold
               ),
             ),
             SizedBox(height: 10.0),
@@ -221,7 +218,6 @@ class BuildBodyPage extends StatelessWidget {
               "Please try again later",
               style: TextStyle(
                 fontSize: 16.0,
-                color: Colors.grey,
               ),
             ),
           ],
